@@ -49,7 +49,12 @@ class DatArchive {
       if (typeof options.latest === 'undefined') {
         options.latest = false
       }
-      Dat(localPath || ram, options, async (err, dat) => {
+
+      let dirOrStorage = localPath || ram;
+      if (typeof options.storage !== 'undefined') {
+          dirOrStorage = options.storage
+      }
+      Dat(dirOrStorage, options, async (err, dat) => {
         if (err) {
           return reject(err)
         }
